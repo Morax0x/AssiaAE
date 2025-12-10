@@ -28,6 +28,8 @@ interface NavbarProps {
     about: string;
     contact: string;
     langLabel: string;
+    mapLabel: string; // إضافة لضمان تحديث اللغة
+    whatsappLabel: string; // إضافة لضمان تحديث اللغة
   };
 }
 
@@ -80,8 +82,6 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   // ✅ تخصيص خط زر اللغة (عكس لغة الموقع)
-  // إذا الموقع إنجليزي، الزر مكتوب "العربية" -> نستخدم Cairo
-  // إذا الموقع عربي، الزر مكتوب "English" -> نستخدم Outfit
   const langButtonFontStyle = {
     fontFamily: isAr ? '"Outfit", sans-serif' : '"Cairo", sans-serif',
   };
@@ -94,7 +94,8 @@ const Navbar: React.FC<NavbarProps> = ({
       whileTap={{ scale: 0.95 }} 
     >
       <img 
-        src="/logo.png" 
+        // ✅ المسار الصحيح للوغو
+        src="/LOGO/assia.png" 
         alt="Asia Business Services" 
         className="h-11 md:h-14 w-auto object-contain drop-shadow-sm"
       />
@@ -103,7 +104,8 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <nav 
-      dir="rtl" 
+      // ✅ تعديل اتجاه النافبار ليتوافق مع اللغة
+      dir={isAr ? 'rtl' : 'ltr'} 
       className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0b1121]/80 backdrop-blur-lg border-b border-slate-200/30 dark:border-slate-800/50 shadow-sm transition-colors duration-300"
       style={fontStyle}
     >
@@ -141,13 +143,12 @@ const Navbar: React.FC<NavbarProps> = ({
 
           {/* 3. الأزرار الجانبية */}
           <div className="hidden md:flex items-center gap-3">
-             {/* زر اللغة - تم ضبط الخط هنا */}
+             {/* زر اللغة */}
             <button
               onClick={handleLangToggle}
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#f15a27] hover:text-white dark:hover:bg-[#f15a27] transition-all duration-300 text-sm font-bold shadow-sm"
             >
               <Globe size={16} />
-              {/* ✅ تطبيق خط خاص للنص داخل الزر */}
               <span style={langButtonFontStyle}>{content.langLabel}</span>
             </button>
 
@@ -168,7 +169,7 @@ const Navbar: React.FC<NavbarProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="group p-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
-              title="Location"
+              title={isAr ? content.mapLabel : content.mapLabel}
             >
                <img src="/LOGO/google-map-icon.png" alt="Google Maps" className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
             </a>
@@ -179,7 +180,7 @@ const Navbar: React.FC<NavbarProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="group p-2 rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300"
-              title="Chat on WhatsApp"
+              title={isAr ? content.whatsappLabel : content.whatsappLabel}
             >
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] group-hover:scale-110 transition-transform" />
             </a>
@@ -241,7 +242,6 @@ const Navbar: React.FC<NavbarProps> = ({
                     className="col-span-2 flex items-center justify-center gap-2 w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
                   >
                     <Globe size={18} />
-                    {/* ✅ تطبيق الخط هنا أيضاً في الموبايل */}
                     <span style={langButtonFontStyle}>{content.langLabel}</span>
                   </button>
 
@@ -252,7 +252,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     className="flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366]/10 text-[#25D366] rounded-xl font-bold hover:bg-[#25D366]/20 transition-colors"
                   >
                     <WhatsAppIcon className="w-5 h-5" />
-                    WhatsApp
+                    {isAr ? content.whatsappLabel : content.whatsappLabel}
                   </a>
 
                   <a
@@ -262,7 +262,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
                   >
                     <img src="/LOGO/google-map-icon.png" alt="Map" className="w-5 h-5 object-contain" />
-                    Map
+                    {isAr ? content.mapLabel : content.mapLabel}
                   </a>
               </div>
             </div>
