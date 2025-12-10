@@ -28,8 +28,8 @@ interface NavbarProps {
     about: string;
     contact: string;
     langLabel: string;
-    mapLabel: string; // إضافة لضمان تحديث اللغة
-    whatsappLabel: string; // إضافة لضمان تحديث اللغة
+    mapLabel: string;
+    whatsappLabel: string;
   };
 }
 
@@ -117,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({
             <Logo />
           </div>
 
-          {/* 2. روابط الوسط */}
+          {/* 2. روابط الوسط (للسطح المكتب فقط) */}
           <div className={`hidden md:flex items-center gap-1 ${isAr ? 'flex-row' : 'flex-row-reverse'}`}>
             {navItems.map((item) => (
               <button
@@ -141,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          {/* 3. الأزرار الجانبية */}
+          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) */}
           <div className="hidden md:flex items-center gap-3">
              {/* زر اللغة */}
             <button
@@ -187,25 +187,40 @@ const Navbar: React.FC<NavbarProps> = ({
 
           </div>
 
-          {/* زر القائمة للموبايل */}
+          {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
+            
+            {/* ✅ زر واتساب (في الشريط العلوي للجوال) */}
+            <a
+              href="https://wa.me/971508433999"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full text-slate-500 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300"
+              title={isAr ? content.whatsappLabel : content.whatsappLabel}
             >
-              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-            </button>
+              <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
+            </a>
+
+             {/* زر الثيم (دارك مود) */}
              <button
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 text-slate-600 dark:text-slate-300 hover:text-[#f15a27]"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+
+            {/* زر القائمة للموبايل */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
+            >
+              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* قائمة الموبايل */}
+      {/* قائمة الموبايل (المنبثقة) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
@@ -244,26 +259,21 @@ const Navbar: React.FC<NavbarProps> = ({
                     <Globe size={18} />
                     <span style={langButtonFontStyle}>{content.langLabel}</span>
                   </button>
-
-                  <a
-                    href="https://wa.me/971508433999"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366]/10 text-[#25D366] rounded-xl font-bold hover:bg-[#25D366]/20 transition-colors"
-                  >
-                    <WhatsAppIcon className="w-5 h-5" />
-                    {isAr ? content.whatsappLabel : content.whatsappLabel}
-                  </a>
+                  
+                  {/* تم حذف زر واتساب المكرر من هنا */}
 
                   <a
                     href="https://maps.app.goo.gl/hQzxyPezuXoHkLKU8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+                    className="col-span-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
                   >
                     <img src="/LOGO/google-map-icon.png" alt="Map" className="w-5 h-5 object-contain" />
                     {isAr ? content.mapLabel : content.mapLabel}
                   </a>
+                  
+                  {/* إضافة عنصر وهمي لملء الفراغ إذا لزم الأمر */}
+                  <div className="col-span-1"></div>
               </div>
             </div>
           </motion.div>
