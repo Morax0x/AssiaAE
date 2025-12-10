@@ -30,7 +30,7 @@ interface NavbarProps {
     langLabel: string;
     mapLabel: string;
     whatsappLabel: string;
-    darkModeToggleLabel: string; // إضافة نص لزر التبديل
+    darkModeToggleLabel: string;
   };
 }
 
@@ -190,7 +190,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* ✅ زر تغيير اللغة (سيكون الثالث من اليسار) */}
+            {/* ✅ زر تغيير اللغة (سيكون الأول من اليمين) */}
             <button
               onClick={handleLangToggle}
               className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
@@ -199,7 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <Globe size={22} />
             </button>
 
-            {/* زر واتساب (سيكون الثاني من اليسار) */}
+            {/* ✅ زر واتساب (سيكون الثاني من اليمين) */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
@@ -210,9 +210,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
             
-            {/* تم حذف زر الخريطة و Dark Mode من الشريط العلوي (الرئيسي) في الجوال */}
-            
-            {/* زر القائمة للموبايل (سيكون الأول من اليسار) */}
+            {/* زر القائمة للموبايل (سيكون الأخير من اليمين) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -253,7 +251,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
                   
-                  {/* ✅ زر الوضع الليلي/النهاري (نقل من الشريط العلوي) */}
+                  {/* ✅ زر الوضع الليلي/النهاري (تم نقله إلى القائمة المسندلة) */}
                   <button
                     onClick={() => {
                         setDarkMode(!darkMode);
