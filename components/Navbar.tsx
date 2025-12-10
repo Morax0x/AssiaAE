@@ -31,7 +31,7 @@ interface NavbarProps {
     mapLabel: string;
     whatsappLabel: string;
     darkModeToggleLabel: string;
-    callUsLabel: string; // نص زر الاتصال
+    callUsLabel: string;
   };
 }
 
@@ -47,9 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isAr = lang === 'ar';
 
-  // ✅ تحميل الخطوط (Cairo للعربي و Outfit للإنجليزي) عند بدء التشغيل
   useEffect(() => {
-    // تحميل خط Outfit
     if (!document.getElementById('font-outfit')) {
       const link = document.createElement('link');
       link.id = 'font-outfit';
@@ -57,7 +55,6 @@ const Navbar: React.FC<NavbarProps> = ({
       link.rel = 'stylesheet';
       document.head.appendChild(link);
     }
-    // تحميل خط Cairo (للغة العربية)
     if (!document.getElementById('font-cairo')) {
       const link = document.createElement('link');
       link.id = 'font-cairo';
@@ -78,12 +75,10 @@ const Navbar: React.FC<NavbarProps> = ({
     setLang(lang === 'en' ? 'ar' : 'en');
   };
 
-  // ✅ تطبيق الخط المناسب: Cairo إذا عربي، Outfit إذا إنجليزي
   const fontStyle = {
     fontFamily: isAr ? '"Cairo", sans-serif' : '"Outfit", sans-serif',
   };
 
-  // ✅ تخصيص خط زر اللغة (عكس لغة الموقع)
   const langButtonFontStyle = {
     fontFamily: isAr ? '"Outfit", sans-serif' : '"Cairo", sans-serif',
   };
@@ -105,21 +100,22 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <nav 
-      // ✅ تعديل اتجاه النافبار ليتوافق مع اللغة
-      dir={isAr ? 'rtl' : 'ltr'} 
+      // ✅ تم التعديل: تثبيت الاتجاه دائماً LTR لضمان ثبات الأيقونات واللوجو في أماكنهم
+      dir="ltr" 
       className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0b1121]/80 backdrop-blur-lg border-b border-slate-200/30 dark:border-slate-800/50 shadow-sm transition-colors duration-300"
       style={fontStyle}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
 
-          {/* 1. اللوغو */}
+          {/* 1. اللوغو (ثابت يسار دائماً) */}
           <div className="flex-shrink-0 flex items-center">
             <Logo />
           </div>
 
           {/* 2. روابط الوسط (للسطح المكتب فقط) */}
-          <div className={`hidden md:flex items-center gap-1 ${isAr ? 'flex-row' : 'flex-row-reverse'}`}>
+          {/* ✅ تم التعديل: عكس ترتيب الكلمات فقط عند اختيار العربية لتبدو طبيعية للقارئ العربي */}
+          <div className={`hidden md:flex items-center gap-1 ${isAr ? 'flex-row-reverse' : 'flex-row'}`}>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -142,7 +138,7 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) - لا تغيير هنا */}
+          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) - ثابتة يمين دائماً */}
           <div className="hidden md:flex items-center gap-3">
              {/* زر اللغة */}
             <button
@@ -170,7 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="group p-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
-              title={isAr ? content.mapLabel : content.mapLabel}
+              title={content.mapLabel}
             >
                <img src="/LOGO/google-map-icon.png" alt="Google Maps" className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
             </a>
@@ -181,28 +177,28 @@ const Navbar: React.FC<NavbarProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="group p-2 rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300"
-              title={isAr ? content.whatsappLabel : content.whatsappLabel}
+              title={content.whatsappLabel}
             >
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] group-hover:scale-110 transition-transform" />
             </a>
 
           </div>
 
-          {/* 4. أزرار الموبايل (للجوال فقط) */}
+          {/* 4. أزرار الموبايل (للجوال فقط) - ثابتة يمين دائماً */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* ✅ زر واتساب (الأول من اليمين) */}
+            {/* زر واتساب */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-full text-slate-500 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300"
-              title={isAr ? content.whatsappLabel : content.whatsappLabel}
+              title={content.whatsappLabel}
             >
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
 
-            {/* ✅ زر تغيير اللغة (الثاني من اليمين) */}
+            {/* زر تغيير اللغة */}
             <button
               onClick={handleLangToggle}
               className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
@@ -211,7 +207,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <Globe size={22} />
             </button>
             
-            {/* زر القائمة للموبايل (الأخير) */}
+            {/* زر القائمة للموبايل */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -230,6 +226,7 @@ const Navbar: React.FC<NavbarProps> = ({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white/95 dark:bg-[#0b1121]/95 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 overflow-hidden shadow-lg"
+            // ✅ هنا نسمح بتغيير الاتجاه (RTL/LTR) فقط للقائمة المنسدلة لكي تظهر النصوص عربية من اليمين
             dir={isAr ? 'rtl' : 'ltr'}
           >
             <div className="px-4 py-6 space-y-2">
@@ -272,14 +269,14 @@ const Navbar: React.FC<NavbarProps> = ({
                     className="col-span-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
                   >
                     <img src="/LOGO/google-map-icon.png" alt="Map" className="w-5 h-5 object-contain" />
-                    {isAr ? content.mapLabel : content.mapLabel}
+                    {content.mapLabel}
                   </a>
                   
                   {/* زر الاتصال */}
                   <a
                     href="tel:+971508433999"
                     className="col-span-1 flex items-center justify-center px-4 py-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
-                    title={isAr ? content.callUsLabel : content.callUsLabel}
+                    title={content.callUsLabel}
                   >
                     <Phone size={24} />
                   </a>
