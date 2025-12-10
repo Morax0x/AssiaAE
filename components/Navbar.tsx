@@ -141,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) */}
+          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) - لا تغيير هنا */}
           <div className="hidden md:flex items-center gap-3">
              {/* زر اللغة */}
             <button
@@ -190,16 +190,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* ✅ زر تغيير اللغة (سيكون الأول من اليمين) */}
-            <button
-              onClick={handleLangToggle}
-              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-              title={content.langLabel}
-            >
-              <Globe size={22} />
-            </button>
-
-            {/* ✅ زر واتساب (سيكون الثاني من اليمين) */}
+            {/* ✅ زر واتساب (تم تقديمه ليكون الأول) */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
@@ -210,7 +201,16 @@ const Navbar: React.FC<NavbarProps> = ({
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
             
-            {/* زر القائمة للموبايل (سيكون الأخير من اليمين) */}
+            {/* ✅ زر تغيير اللغة (تم تأخيره ليكون الثاني) */}
+            <button
+              onClick={handleLangToggle}
+              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              title={content.langLabel}
+            >
+              <Globe size={22} />
+            </button>
+            
+            {/* زر القائمة للموبايل (بدون تغيير) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -251,16 +251,17 @@ const Navbar: React.FC<NavbarProps> = ({
 
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
                   
-                  {/* ✅ زر الوضع الليلي/النهاري (تم نقله إلى القائمة المسندلة) */}
+                  {/* ✅ زر الوضع الليلي/النهاري (تم إزالة النص منه) */}
                   <button
                     onClick={() => {
                         setDarkMode(!darkMode);
                         setMobileMenuOpen(false);
                     }}
-                    className="col-span-2 flex items-center justify-center gap-2 w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
+                    className="col-span-2 flex items-center justify-center w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
+                    title={darkMode ? 'الوضع النهاري' : 'الوضع الليلي'}
                   >
-                    {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-                    {isAr ? 'الوضع الليلي/النهاري' : 'Toggle Dark Mode'}
+                    {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+                    {/* تم إزالة النص بناء على طلب المستخدم */}
                   </button>
 
                   {/* زر الخريطة (تم وضعه هنا فقط) */}
