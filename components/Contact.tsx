@@ -17,6 +17,17 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
   const isAr = content.ctaSecondary === 'تواصل معنا';
 
+  // 1. كشف حجم الشاشة لضبط الميلان (لأنه framer motion يتجاهل كلاسات css أحياناً في الـ animate)
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsLargeScreen(window.innerWidth >= 1024);
+    checkScreen(); // تشغيل فوري
+    window.addEventListener('resize', checkScreen);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
+
+  // تحميل الخط الإنجليزي
   useEffect(() => {
     if (!document.getElementById('en-font-outfit')) {
       const link = document.createElement('link');
@@ -34,6 +45,7 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
   const startSide = isAr ? 'right' : 'left'; 
   const endSide = isAr ? 'left' : 'right';
 
+  // تجهيز البيانات
   const allServices = useMemo(() => {
     const arItems = APP_CONTENT?.['ar']?.services?.items || [];
     const enItems = APP_CONTENT?.['en']?.services?.items || [];
@@ -69,6 +81,7 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const [activeIndices, setActiveIndices] = useState([0, 5, 10]);
 
+  // تايمرات تبديل الشعارات والخدمات
   useEffect(() => {
     const updateLogoIndex = (positionToUpdate: number) => {
       setActiveIndices(prevIndices => {
@@ -93,11 +106,11 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
     };
   }, [govLogos.length, allServices.length]);
 
+  // إعدادات الحركة
   const floatingAnimation = { y: [-10, 10, -10], rotate: [-2, 2, -2], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } };
   const floatingAnimationReverse = { y: [10, -10, 10], rotate: [2, -2, 2], transition: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 } };
   const floatingAnimationSlow = { y: [-5, 5, -5], rotate: [1, -1, 1], transition: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 } };
   const dragProps = { drag: true, dragConstraints: { left: 0, right: 0, top: 0, bottom: 0 }, dragElastic: 0.2, whileHover: { scale: 1.1, cursor: 'grab', zIndex: 50 }, whileDrag: { scale: 1.2, cursor: 'grabbing', zIndex: 100 } };
-
   const layoutTransition = { type: "spring", stiffness: 70, damping: 20 };
 
   return (
@@ -243,35 +256,41 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
                   </div>
                 </motion.div>
 
-                {/* ✅ التعديلات الجديدة: */}
-
-                {/* 1. شعار اليمين العلوي: خلفية مطابقة للرئيسي في الجوال */}
+                {/* 1. شعار اليمين العلوي */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimation} className={`absolute top-[5%] ${startSide}-[-18%] lg:${startSide}-[-5%] z-30 w-16 h-16 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/60 lg:dark:bg-slate-800/60 lg:border-white/40 shadow-lg rounded-2xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[0]} src={govLogos[activeIndices[0]]} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                {/* 2. شعار اليمين السفلي: خلفية مطابقة للرئيسي في الجوال */}
+                {/* 2. شعار اليمين السفلي */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationSlow} className={`absolute bottom-[25%] ${startSide}-[-22%] lg:${startSide}-[-8%] z-20 w-14 h-14 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/60 lg:dark:bg-slate-800/60 lg:border-white/40 shadow-lg rounded-2xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[1]} src={govLogos[activeIndices[1]]} initial={{ opacity: 0, rotate: -10 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 10 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                 {/* 3. الشعار الأيسر: خلفية مطابقة للرئيسي في الجوال */}
+                 {/* 3. الشعار الأيسر */}
                  <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationReverse} className={`absolute top-[15%] ${endSide}-[-18%] lg:${endSide}-[-5%] z-10 w-12 h-12 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/50 lg:dark:bg-slate-800/50 lg:border-white/30 shadow-md rounded-xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[2]} src={govLogos[activeIndices[2]]} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                {/* 4. زر تم الإنجاز: تعديل الموقع (-14%) والميلان (-6) */}
+                {/* 4. زر تم الإنجاز */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationReverse} className={`absolute bottom-[-25%] lg:bottom-[10%] ${endSide}-[-14%] lg:${endSide}-[-5%] -rotate-6 lg:rotate-0 z-30 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-white/40 shadow-lg flex items-center justify-center gap-2 pointer-events-auto`}>
                     <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                     <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{isAr ? 'تم الإنجاز' : 'Completed'}</span>
                 </motion.div>
 
-                {/* 5. بطاقة الخدمات: */}
+                {/* 5. بطاقة الخدمات (تم تثبيت الميلان هنا في الأنيميشن) */}
                 <motion.div 
                    layout 
-                   transition={{ layout: layoutTransition, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                   animate={{ y: [-8, 8, -8] }}
-                   className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] ${isAr ? '-rotate-6' : 'rotate-6'} lg:rotate-0 z-40 pointer-events-auto transition-all duration-700`}
+                   transition={{ 
+                     layout: layoutTransition, 
+                     y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                     rotate: { duration: 0.5 } 
+                   }}
+                   animate={{ 
+                     y: [-10, 10, -10],
+                     // هنا الشرط المهم: إذا كانت شاشة كبيرة الميلان 0، وإلا يأخذ الميلان حسب اللغة
+                     rotate: isLargeScreen ? 0 : (isAr ? -6 : 6)
+                   }}
+                   className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] z-40 pointer-events-auto transition-all duration-700`}
                 >
                    <AnimatePresence mode='wait'>
                       <motion.div {...dragProps} key={currentServiceIndex} initial={{ opacity: 0, x: isAr ? -20 : 20, scale: 0.9 }} animate={{ scale: 1, x: 0, opacity: 1 }} exit={{ opacity: 0, x: isAr ? 20 : -20, scale: 0.9 }} transition={{ duration: 0.5 }} className="flex items-center gap-3 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl lg:bg-white/80 lg:dark:bg-slate-800/80 p-3 pr-6 rounded-2xl border border-white/20 dark:border-slate-700/30 lg:border-white/40 shadow-xl">
