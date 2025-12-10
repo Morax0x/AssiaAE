@@ -243,44 +243,45 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
                   </div>
                 </motion.div>
 
-                {/* ✅ التعديلات الجديدة: */}
-
-                {/* 1. شعار اليمين العلوي: خلفية مطابقة للرئيسي في الجوال */}
+                {/* 1. شعار اليمين العلوي */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimation} className={`absolute top-[5%] ${startSide}-[-18%] lg:${startSide}-[-5%] z-30 w-16 h-16 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/60 lg:dark:bg-slate-800/60 lg:border-white/40 shadow-lg rounded-2xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[0]} src={govLogos[activeIndices[0]]} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                {/* 2. شعار اليمين السفلي: خلفية مطابقة للرئيسي في الجوال */}
+                {/* 2. شعار اليمين السفلي */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationSlow} className={`absolute bottom-[25%] ${startSide}-[-22%] lg:${startSide}-[-8%] z-20 w-14 h-14 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/60 lg:dark:bg-slate-800/60 lg:border-white/40 shadow-lg rounded-2xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[1]} src={govLogos[activeIndices[1]]} initial={{ opacity: 0, rotate: -10 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 10 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                 {/* 3. الشعار الأيسر: خلفية مطابقة للرئيسي في الجوال */}
+                 {/* 3. الشعار الأيسر */}
                  <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationReverse} className={`absolute top-[15%] ${endSide}-[-18%] lg:${endSide}-[-5%] z-10 w-12 h-12 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 lg:bg-white/50 lg:dark:bg-slate-800/50 lg:border-white/30 shadow-md rounded-xl border flex items-center justify-center p-2 overflow-hidden pointer-events-auto`}>
                     <AnimatePresence mode='wait'><motion.img key={activeIndices[2]} src={govLogos[activeIndices[2]]} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.5 }} className="w-full h-full object-contain pointer-events-none" /></AnimatePresence>
                 </motion.div>
 
-                {/* 4. زر تم الإنجاز: تعديل الموقع (-14%) والميلان (-6) */}
+                {/* 4. زر تم الإنجاز */}
                 <motion.div layout transition={layoutTransition} {...dragProps} animate={floatingAnimationReverse} className={`absolute bottom-[-25%] lg:bottom-[10%] ${endSide}-[-14%] lg:${endSide}-[-5%] -rotate-6 lg:rotate-0 z-30 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-white/40 shadow-lg flex items-center justify-center gap-2 pointer-events-auto`}>
                     <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                     <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{isAr ? 'تم الإنجاز' : 'Completed'}</span>
                 </motion.div>
 
-                {/* 5. بطاقة الخدمات: */}
+                {/* 5. بطاقة الخدمات - تم التعديل هنا */}
                 <motion.div 
                     layout 
                     transition={layoutTransition}
-                    className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] ${isAr ? '-rotate-6' : 'rotate-6'} lg:rotate-0 z-40 pointer-events-auto`}
+                    className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] z-40 pointer-events-auto`}
                 >
-                    <AnimatePresence mode='wait'>
-                       <motion.div {...dragProps} key={currentServiceIndex} initial={{ opacity: 0, x: isAr ? -20 : 20, scale: 0.9 }} animate={{ scale: 1, x: 0, opacity: 1 }} exit={{ opacity: 0, x: isAr ? 20 : -20, scale: 0.9 }} transition={{ duration: 0.5 }} className="flex items-center gap-3 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl lg:bg-white/80 lg:dark:bg-slate-800/80 p-3 pr-6 rounded-2xl border border-white/20 dark:border-slate-700/30 lg:border-white/40 shadow-xl">
-                           <div className={`p-2 rounded-xl shadow-sm ${allServices[currentServiceIndex].color}`}>{React.createElement(allServices[currentServiceIndex].icon, { size: 20 })}</div>
-                           <div className="flex flex-col text-start">
-                              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{isAr ? 'خـدمـات' : 'Featured Service'}</span>
-                              <span className="text-sm font-bold text-slate-800 dark:text-white whitespace-nowrap">{isAr ? allServices[currentServiceIndex].titleAr : allServices[currentServiceIndex].titleEn}</span>
-                           </div>
-                       </motion.div>
-                    </AnimatePresence>
+                    {/* إضافة حاوية div عادية للتحكم بالتدوير بعيداً عن Framer */}
+                    <div className={`${isAr ? '-rotate-6' : 'rotate-6'} lg:rotate-0 transition-transform duration-500`}>
+                        <AnimatePresence mode='wait'>
+                           <motion.div {...dragProps} key={currentServiceIndex} initial={{ opacity: 0, x: isAr ? -20 : 20, scale: 0.9 }} animate={{ scale: 1, x: 0, opacity: 1 }} exit={{ opacity: 0, x: isAr ? 20 : -20, scale: 0.9 }} transition={{ duration: 0.5 }} className="flex items-center gap-3 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl lg:bg-white/80 lg:dark:bg-slate-800/80 p-3 pr-6 rounded-2xl border border-white/20 dark:border-slate-700/30 lg:border-white/40 shadow-xl">
+                               <div className={`p-2 rounded-xl shadow-sm ${allServices[currentServiceIndex].color}`}>{React.createElement(allServices[currentServiceIndex].icon, { size: 20 })}</div>
+                               <div className="flex flex-col text-start">
+                                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{isAr ? 'خـدمـات' : 'Featured Service'}</span>
+                                  <span className="text-sm font-bold text-slate-800 dark:text-white whitespace-nowrap">{isAr ? allServices[currentServiceIndex].titleAr : allServices[currentServiceIndex].titleEn}</span>
+                               </div>
+                           </motion.div>
+                        </AnimatePresence>
+                    </div>
                 </motion.div>
              </div>
            </div>
