@@ -30,6 +30,7 @@ interface NavbarProps {
     langLabel: string;
     mapLabel: string;
     whatsappLabel: string;
+    darkModeToggleLabel: string; // إضافة نص لزر التبديل
   };
 }
 
@@ -189,7 +190,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* ✅ نقل زر اللغة ليكون بجانب واتساب والخريطة */}
+            {/* ✅ زر تغيير اللغة (سيكون الثالث من اليسار) */}
             <button
               onClick={handleLangToggle}
               className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
@@ -198,18 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <Globe size={22} />
             </button>
 
-            {/* زر الخريطة (تم تصغيره ليتناسب مع أزرار الأيقونات) */}
-            <a
-              href="https://maps.app.goo.gl/hQzxyPezuXoHkLKU8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
-              title={isAr ? content.mapLabel : content.mapLabel}
-            >
-               <img src="/LOGO/google-map-icon.png" alt="Map" className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
-            </a>
-
-            {/* زر واتساب */}
+            {/* زر واتساب (سيكون الثاني من اليسار) */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
@@ -219,16 +209,10 @@ const Navbar: React.FC<NavbarProps> = ({
             >
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
-
-             {/* زر الثيم (دارك مود) */}
-             <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 text-slate-600 dark:text-slate-300 hover:text-[#f15a27]"
-            >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-
-            {/* زر القائمة للموبايل */}
+            
+            {/* تم حذف زر الخريطة و Dark Mode من الشريط العلوي (الرئيسي) في الجوال */}
+            
+            {/* زر القائمة للموبايل (سيكون الأول من اليسار) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -268,21 +252,20 @@ const Navbar: React.FC<NavbarProps> = ({
               ))}
 
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
-                 
-                  {/* ✅ تم حذف زر اللغة المكرر من هنا */}
                   
-                  {/* زر واتساب */}
-                  <a
-                    href="https://wa.me/971508433999"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="col-span-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366]/10 text-[#25D366] rounded-xl font-bold hover:bg-[#25D366]/20 transition-colors"
+                  {/* ✅ زر الوضع الليلي/النهاري (نقل من الشريط العلوي) */}
+                  <button
+                    onClick={() => {
+                        setDarkMode(!darkMode);
+                        setMobileMenuOpen(false);
+                    }}
+                    className="col-span-2 flex items-center justify-center gap-2 w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
                   >
-                    <WhatsAppIcon className="w-5 h-5" />
-                    {isAr ? content.whatsappLabel : content.whatsappLabel}
-                  </a>
+                    {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                    {isAr ? 'الوضع الليلي/النهاري' : 'Toggle Dark Mode'}
+                  </button>
 
-                  {/* زر الخريطة */}
+                  {/* زر الخريطة (تم وضعه هنا فقط) */}
                   <a
                     href="https://maps.app.goo.gl/hQzxyPezuXoHkLKU8"
                     target="_blank"
@@ -291,6 +274,14 @@ const Navbar: React.FC<NavbarProps> = ({
                   >
                     <img src="/LOGO/google-map-icon.png" alt="Map" className="w-5 h-5 object-contain" />
                     {isAr ? content.mapLabel : content.mapLabel}
+                  </a>
+                  
+                  {/* زر الاتصال */}
+                  <a
+                    href="tel:+971508433999"
+                    className="col-span-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
+                  >
+                    {isAr ? 'اتصل بنا' : 'Call Us'}
                   </a>
                   
               </div>
