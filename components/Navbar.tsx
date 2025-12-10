@@ -191,16 +191,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* زر اللغة */}
-            <button
-              onClick={handleLangToggle}
-              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-              title={content.langLabel}
-            >
-              <Globe size={22} />
-            </button>
-
-            {/* زر واتساب */}
+            {/* ✅ زر واتساب (الأول من اليمين) */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
@@ -210,8 +201,17 @@ const Navbar: React.FC<NavbarProps> = ({
             >
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
+
+            {/* ✅ زر تغيير اللغة (الثاني من اليمين) */}
+            <button
+              onClick={handleLangToggle}
+              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              title={content.langLabel}
+            >
+              <Globe size={22} />
+            </button>
             
-            {/* زر القائمة للموبايل */}
+            {/* زر القائمة للموبايل (الأخير) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -262,7 +262,6 @@ const Navbar: React.FC<NavbarProps> = ({
                     title={darkMode ? 'الوضع النهاري' : 'الوضع الليلي'}
                   >
                     {darkMode ? <Sun size={24} /> : <Moon size={24} />}
-                    {/* تم إزالة النص */}
                   </button>
 
                   {/* زر الخريطة */}
@@ -276,14 +275,13 @@ const Navbar: React.FC<NavbarProps> = ({
                     {isAr ? content.mapLabel : content.mapLabel}
                   </a>
                   
-                  {/* ✅ زر الاتصال (أيقونة فقط) */}
+                  {/* زر الاتصال */}
                   <a
                     href="tel:+971508433999"
                     className="col-span-1 flex items-center justify-center px-4 py-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
                     title={isAr ? content.callUsLabel : content.callUsLabel}
                   >
                     <Phone size={24} />
-                    {/* تم إزالة النص */}
                   </a>
                   
               </div>
