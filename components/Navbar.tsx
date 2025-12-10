@@ -100,21 +100,22 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <nav 
-      // ✅ تم إعادة التوجيه التلقائي (RTL للعربي و LTR للانجليزي) ليعكس الأماكن بشكل صحيح
-      dir={isAr ? 'rtl' : 'ltr'} 
+      // ✅ تم التعديل: تثبيت الاتجاه RTL دائماً (اللوجو يمين، الأزرار يسار)
+      dir="rtl" 
       className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0b1121]/80 backdrop-blur-lg border-b border-slate-200/30 dark:border-slate-800/50 shadow-sm transition-colors duration-300"
       style={fontStyle}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
 
-          {/* 1. اللوغو */}
+          {/* 1. اللوغو (ثابت في جهة اليمين بسبب dir=rtl) */}
           <div className="flex-shrink-0 flex items-center">
             <Logo />
           </div>
 
           {/* 2. روابط الوسط (للسطح المكتب فقط) */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* ✅ تم التعديل: الكلمات تتحرك حسب اللغة (عربي: يمين لليسار | انجليزي: يسار ليمين) */}
+          <div className={`hidden md:flex items-center gap-1 ${isAr ? 'flex-row' : 'flex-row-reverse'}`}>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -125,22 +126,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     : 'text-slate-600 dark:text-slate-300 hover:text-[#f15a27] dark:hover:text-[#f15a27]'
                 }`}
               >
-                {/* ✅ إضافة أنيميشن للكلمات عند تغيير اللغة */}
-                <div className="relative overflow-hidden min-w-[3ch] flex justify-center">
-                    <AnimatePresence mode="wait">
-                        <motion.span
-                            key={item.label} // المفتاح هو الكلمة نفسها لتفعيل الانميشن عند التغيير
-                            initial={{ y: 10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -10, opacity: 0 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="block"
-                        >
-                            {item.label}
-                        </motion.span>
-                    </AnimatePresence>
-                </div>
-
+                {item.label}
                 {view === item.id && (
                   <motion.div 
                     layoutId="activeNav"
@@ -152,7 +138,7 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) */}
+          {/* 3. الأزرار الجانبية (للسطح المكتب فقط) - ثابتة يسار دائماً */}
           <div className="hidden md:flex items-center gap-3">
              {/* زر اللغة */}
             <button
@@ -198,7 +184,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
           </div>
 
-          {/* 4. أزرار الموبايل (للجوال فقط) */}
+          {/* 4. أزرار الموبايل (للجوال فقط) - ثابتة يسار دائماً */}
           <div className="md:hidden flex items-center gap-2">
             
             {/* زر واتساب */}
@@ -240,6 +226,7 @@ const Navbar: React.FC<NavbarProps> = ({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white/95 dark:bg-[#0b1121]/95 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 overflow-hidden shadow-lg"
+            // ✅ تغيير اتجاه النص داخل القائمة المنسدلة فقط حسب اللغة
             dir={isAr ? 'rtl' : 'ltr'}
           >
             <div className="px-4 py-6 space-y-2">
@@ -256,18 +243,7 @@ const Navbar: React.FC<NavbarProps> = ({
                       : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                   }`}
                 >
-                  <AnimatePresence mode="wait">
-                        <motion.span
-                            key={item.label}
-                            initial={{ x: isAr ? 10 : -10, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: isAr ? -10 : 10, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="block"
-                        >
-                            {item.label}
-                        </motion.span>
-                    </AnimatePresence>
+                  {item.label}
                 </button>
               ))}
 
