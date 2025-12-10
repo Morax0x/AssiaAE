@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Language, View } from '../types';
-import { Menu, X, Moon, Sun, Globe } from 'lucide-react';
+import { Menu, X, Moon, Sun, Globe, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // شعار واتساب
@@ -31,6 +31,7 @@ interface NavbarProps {
     mapLabel: string;
     whatsappLabel: string;
     darkModeToggleLabel: string;
+    callUsLabel: string; // نص زر الاتصال
   };
 }
 
@@ -190,7 +191,16 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* 4. أزرار الموبايل (للجوال فقط) */}
           <div className="md:hidden flex items-center gap-2">
             
-            {/* ✅ زر واتساب (تم تقديمه ليكون الأول) */}
+            {/* زر اللغة */}
+            <button
+              onClick={handleLangToggle}
+              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              title={content.langLabel}
+            >
+              <Globe size={22} />
+            </button>
+
+            {/* زر واتساب */}
             <a
               href="https://wa.me/971508433999"
               target="_blank"
@@ -201,16 +211,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <WhatsAppIcon className="w-6 h-6 text-[#25D366] transition-transform" />
             </a>
             
-            {/* ✅ زر تغيير اللغة (تم تأخيره ليكون الثاني) */}
-            <button
-              onClick={handleLangToggle}
-              className="flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#f15a27] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-              title={content.langLabel}
-            >
-              <Globe size={22} />
-            </button>
-            
-            {/* زر القائمة للموبايل (بدون تغيير) */}
+            {/* زر القائمة للموبايل */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 dark:text-white hover:text-[#f15a27] p-2 transition-colors"
@@ -251,7 +252,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
                   
-                  {/* ✅ زر الوضع الليلي/النهاري (تم إزالة النص منه) */}
+                  {/* زر الوضع الليلي/النهاري */}
                   <button
                     onClick={() => {
                         setDarkMode(!darkMode);
@@ -261,10 +262,10 @@ const Navbar: React.FC<NavbarProps> = ({
                     title={darkMode ? 'الوضع النهاري' : 'الوضع الليلي'}
                   >
                     {darkMode ? <Sun size={24} /> : <Moon size={24} />}
-                    {/* تم إزالة النص بناء على طلب المستخدم */}
+                    {/* تم إزالة النص */}
                   </button>
 
-                  {/* زر الخريطة (تم وضعه هنا فقط) */}
+                  {/* زر الخريطة */}
                   <a
                     href="https://maps.app.goo.gl/hQzxyPezuXoHkLKU8"
                     target="_blank"
@@ -275,12 +276,14 @@ const Navbar: React.FC<NavbarProps> = ({
                     {isAr ? content.mapLabel : content.mapLabel}
                   </a>
                   
-                  {/* زر الاتصال */}
+                  {/* ✅ زر الاتصال (أيقونة فقط) */}
                   <a
                     href="tel:+971508433999"
-                    className="col-span-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
+                    className="col-span-1 flex items-center justify-center px-4 py-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
+                    title={isAr ? content.callUsLabel : content.callUsLabel}
                   >
-                    {isAr ? 'اتصل بنا' : 'Call Us'}
+                    <Phone size={24} />
+                    {/* تم إزالة النص */}
                   </a>
                   
               </div>
