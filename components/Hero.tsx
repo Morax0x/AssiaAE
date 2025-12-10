@@ -267,17 +267,21 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
                 </motion.div>
 
                 {/* 5. بطاقة الخدمات: */}
-                <div className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] -rotate-6 lg:rotate-0 z-40 pointer-events-auto transition-all duration-700`}>
+                <motion.div 
+                    layout 
+                    transition={layoutTransition}
+                    className={`absolute top-[65%] lg:top-[40%] ${endSide}-[-18%] -rotate-6 lg:rotate-0 z-40 pointer-events-auto`}
+                >
                    <AnimatePresence mode='wait'>
                       <motion.div {...dragProps} key={currentServiceIndex} initial={{ opacity: 0, x: isAr ? -20 : 20, scale: 0.9 }} animate={{ scale: 1, x: 0, opacity: 1 }} exit={{ opacity: 0, x: isAr ? 20 : -20, scale: 0.9 }} transition={{ duration: 0.5 }} className="flex items-center gap-3 bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl lg:bg-white/80 lg:dark:bg-slate-800/80 p-3 pr-6 rounded-2xl border border-white/20 dark:border-slate-700/30 lg:border-white/40 shadow-xl">
-                         <div className={`p-2 rounded-xl shadow-sm ${allServices[currentServiceIndex].color}`}>{React.createElement(allServices[currentServiceIndex].icon, { size: 20 })}</div>
-                         <div className="flex flex-col text-start">
-                            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{isAr ? 'خـدمـات' : 'Featured Service'}</span>
-                            <span className="text-sm font-bold text-slate-800 dark:text-white whitespace-nowrap">{isAr ? allServices[currentServiceIndex].titleAr : allServices[currentServiceIndex].titleEn}</span>
-                         </div>
+                          <div className={`p-2 rounded-xl shadow-sm ${allServices[currentServiceIndex].color}`}>{React.createElement(allServices[currentServiceIndex].icon, { size: 20 })}</div>
+                          <div className="flex flex-col text-start">
+                             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{isAr ? 'خـدمـات' : 'Featured Service'}</span>
+                             <span className="text-sm font-bold text-slate-800 dark:text-white whitespace-nowrap">{isAr ? allServices[currentServiceIndex].titleAr : allServices[currentServiceIndex].titleEn}</span>
+                          </div>
                       </motion.div>
                    </AnimatePresence>
-                </div>
+                </motion.div>
              </div>
            </div>
         </motion.div>
