@@ -154,7 +154,7 @@ const Hero: React.FC<HeroProps> = ({ content, onCtaClick, onContactClick }) => {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-gradient-to-r from-[#f15a27] to-orange-600"></span>
             </span>
             <span className="text-slate-700 dark:text-slate-300 text-xs font-bold tracking-wide">
-              {isAr ? 'خيارك الأمثل لتخليص المعاملات' : 'Your Ideal Choice for Typing Clearing'}
+              {isAr ? 'خيارك الأمثل لتخليص المعاملات' : 'Your Ideal Choice for Document Clearing'}
             </span>
           </motion.div>
 
