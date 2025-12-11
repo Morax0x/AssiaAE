@@ -12,7 +12,7 @@ export const SERVICES_FEES: Record<string, { itemAr: string; itemEn: string; fee
     { itemAr: 'رسوم الأنشطة', itemEn: 'Activity Fees', feeAr: '4000 - 15000', feeEn: '4000 - 15000' }
   ],
   s2: [{ itemAr: 'رسوم الحجز', itemEn: 'Reservation Fee', feeAr: '620', feeEn: '620' }],
-  s3: [{ itemAr: 'رسوم الموافقة', itemEn: 'Approval Fee', feeAr: '350', feeEn: '350' }],
+  s3: [{ itemAr: 'رسوم الموافقة', itemEn: 'Approval Fee', feeAr: '250', feeEn: '250' }],
   s4: [{ itemAr: 'رسوم الخدمة', itemEn: 'Service Fee', feeAr: '350 + الحكومية', feeEn: '350 + Gov Fees' }, { itemAr: 'عقد الإيجار', itemEn: 'Tenancy Contract', feeAr: '250', feeEn: '250' }],
   s5: [{ itemAr: 'رسوم التعديل', itemEn: 'Amendment Fee', feeAr: '500', feeEn: '500' }, { itemAr: 'رسوم الإعلان', itemEn: 'Advertisement', feeAr: '300', feeEn: '300' }],
   s6: [{ itemAr: 'رسوم الملحق', itemEn: 'Addendum Fee', feeAr: '1500', feeEn: '1500' }, { itemAr: 'النشر', itemEn: 'Publication', feeAr: '500', feeEn: '500' }],
@@ -28,13 +28,13 @@ export const SERVICES_FEES: Record<string, { itemAr: string; itemEn: string; fee
   s14: [{ itemAr: 'رسوم المعالجة', itemEn: 'Processing', feeAr: '300', feeEn: '300' }, { itemAr: 'رسوم الإقامة', itemEn: 'Visa Fee', feeAr: '2300', feeEn: '2300' }],
 
   // --- Residency ---
-  s15: [{ itemAr: 'رسوم الإقامة (3 سنوات)', itemEn: '3-Year Visa', feeAr: '800', feeEn: '800' }, { itemAr: 'فحص طبي', itemEn: 'Medical', feeAr: '300', feeEn: '300' }],
+  s15: [{ itemAr: 'رسوم اقامة', itemEn: 'Visa', feeAr: '450', feeEn: '450' }, { itemAr: 'فحص طبي', itemEn: 'Medical', feeAr: '300', feeEn: '300' }],
   s16: [{ itemAr: 'رسوم التصريح', itemEn: 'Permit Fee', feeAr: '250 - 500', feeEn: '250 - 500' }, { itemAr: 'الضمان (إن وجد)', itemEn: 'Deposit', feeAr: '1000', feeEn: '1000' }],
   s17: [{ itemAr: 'فتح الملف', itemEn: 'File Opening', feeAr: '250', feeEn: '250' }, { itemAr: 'الإقامة', itemEn: 'Visa Stamping', feeAr: '800', feeEn: '800' }],
   s18: [{ itemAr: 'رسوم الإقامة', itemEn: 'Visa Fee', feeAr: '1100', feeEn: '1100' }, { itemAr: 'الضمان المالي', itemEn: 'Deposit', feeAr: '3000', feeEn: '3000' }],
-  s19: [{ itemAr: 'رسوم الإقامة', itemEn: 'Visa Fee', feeAr: '350', feeEn: '350' }, { itemAr: 'الهوية', itemEn: 'ID', feeAr: '170', feeEn: '170' }],
+  s19: [{ itemAr: 'رسوم الإقامة', itemEn: 'Visa Fee', feeAr: '450', feeEn: '450' }, { itemAr: 'الهوية', itemEn: 'ID', feeAr: '400', feeEn: '400' }],
   s20: [{ itemAr: 'رسوم التثبيت', itemEn: 'Stamping', feeAr: '200', feeEn: '200' }],
-  s21: [{ itemAr: 'تجديد الإقامة', itemEn: 'Visa Renewal', feeAr: '800', feeEn: '800' }, { itemAr: 'تجديد الهوية', itemEn: 'ID Renewal', feeAr: '270', feeEn: '270' }],
+  s21: [{ itemAr: 'تجديد الإقامة', itemEn: 'Visa Renewal', feeAr: '850', feeEn: '850' }, { itemAr: 'تجديد الهوية', itemEn: 'ID Renewal', feeAr: '450', feeEn: '450' }],
   s22: [{ itemAr: 'رسوم الإلغاء', itemEn: 'Cancellation', feeAr: '160', feeEn: '160' }],
   s23: [{ itemAr: 'رسم الخدمة', itemEn: 'Service Fee', feeAr: '100 + الغرامة', feeEn: '100 + Fine' }],
   s24: [{ itemAr: 'رسوم النقل', itemEn: 'Transfer Fee', feeAr: '220', feeEn: '220' }],
@@ -50,8 +50,8 @@ export const SERVICES_FEES: Record<string, { itemAr: string; itemEn: string; fee
   s32: [{ itemAr: 'باقة تدبير', itemEn: 'Tadbeer Pkg', feeAr: 'تبدأ من 5000', feeEn: 'Starts from 5000' }, { itemAr: 'رسوم الخدمة', itemEn: 'Service Fee', feeAr: '300', feeEn: '300' }],
 
   // --- ID & Medical ---
-  s33: [{ itemAr: 'رسوم الهوية (سنتين)', itemEn: 'ID 2 Years', feeAr: '270', feeEn: '270' }, { itemAr: 'رسوم الخدمة', itemEn: 'Service Fee', feeAr: '30', feeEn: '30' }],
-  s34: [{ itemAr: 'تجديد (سنتين)', itemEn: 'Renew 2 Years', feeAr: '270', feeEn: '270' }, { itemAr: 'تجديد (3 سنوات)', itemEn: 'Renew 3 Years', feeAr: '370', feeEn: '370' }],
+  s33: [{ itemAr: 'رسوم الهوية (سنتين)', itemEn: 'ID 2 Years', feeAr: '450', feeEn: '450' }, { itemAr: 'رسوم الخدمة', itemEn: 'Service Fee', feeAr: '30', feeEn: '30' }],
+  s34: [{ itemAr: 'تجديد (سنتين)', itemEn: 'Renew 2 Years', feeAr: '450', feeEn: '450' }, { itemAr: 'تجديد (3 سنوات)', itemEn: 'Renew 3 Years', feeAr: '700', feeEn: '700' }],
   s35: [{ itemAr: 'عادي (48 س)', itemEn: 'Normal', feeAr: '302', feeEn: '302' }, { itemAr: 'VIP (4 س)', itemEn: 'VIP', feeAr: '750', feeEn: '750' }],
   s36: [{ itemAr: 'رسوم البطاقة', itemEn: 'Card Fee', feeAr: '150 - 300', feeEn: '150 - 300' }],
   s37: [{ itemAr: 'الباقة الأساسية', itemEn: 'Basic Plan', feeAr: '650', feeEn: '650' }, { itemAr: 'رسوم الخدمة', itemEn: 'Service Fee', feeAr: '100', feeEn: '100' }],
@@ -61,7 +61,7 @@ export const SERVICES_FEES: Record<string, { itemAr: string; itemEn: string; fee
   s39: [{ itemAr: 'توكيل عام', itemEn: 'General POA', feeAr: '350', feeEn: '350' }, { itemAr: 'توكيل خاص', itemEn: 'Special POA', feeAr: '250', feeEn: '250' }],
   s40: [{ itemAr: 'ترجمة (صفحة)', itemEn: 'Per Page', feeAr: '30', feeEn: '30' }],
   s41: [{ itemAr: 'تصديق عادي', itemEn: 'Normal Attest', feeAr: '150', feeEn: '150' }, { itemAr: 'تصديق تجاري', itemEn: 'Commercial', feeAr: '2000', feeEn: '2000' }],
-  s42: [{ itemAr: 'رسوم المعادلة', itemEn: 'Equivalency', feeAr: '100', feeEn: '100' }],
+  s42: [{ itemAr: 'رسوم المعادلة', itemEn: 'Equivalency', feeAr: '200', feeEn: '200' }],
 
   // --- Municipality ---
   s43: [{ itemAr: 'رسوم التوثيق', itemEn: 'Registration', feeAr: '220', feeEn: '220' }, { itemAr: 'نسبة البلدية', itemEn: 'Muni Fee', feeAr: '5% من الإيجار', feeEn: '5% of Rent' }],
