@@ -31,7 +31,7 @@ const fakeReviews = [
   { nameAr: "محمد العلي", nameEn: "Mohammed Al Ali", rating: 5.0, commentAr: "خدمة ممتازة وسريعة جداً، أنصح بهم.", commentEn: "Excellent and very fast service, highly recommended.", avatar: defaultAvatar },
   { nameAr: "خالد البلوشي", nameEn: "Khalid Al Balushi", rating: 4.9, commentAr: "الأفضل في عجمان لتخليص المعاملات.", commentEn: "The best in Ajman for transaction clearing.", avatar: defaultAvatar },
   { nameAr: "أم فهد", nameEn: "Um Fahad", rating: 5.0, commentAr: "ثقة وأمانة في التعامل، شكراً جزيلاً.", commentEn: "Trust and honesty in dealing, thank you very much.", avatar: defaultAvatar },
-  { nameAr: "عبدالله المهيري", nameEn: "Abdullah Al Muhairi", rating: 5.0, commentAr: "خدمة المندوب عندهم ممتازة وتريح البال.", commentEn: "Their PRO service is excellent and gives peace of mind.", avatar: defaultAvatar },
+  { nameAr: "عبدالله المهيري", nameEn: "Abdullah Al Muhairi", rating: 5.0, commentAr: "خدمات عندهم ممتازة", commentEn: "Their PRO service is excellent and gives peace of mind.", avatar: defaultAvatar },
   { nameAr: "سلطان الشامسي", nameEn: "Sultan Al Shamsi", rating: 4.8, commentAr: "إجراءات تجديد الرخصة كانت سهلة جداً معكم.", commentEn: "License renewal procedures were very easy with you.", avatar: defaultAvatar },
   { nameAr: "فاطمة الكعبي", nameEn: "Fatima Al Kaabi", rating: 5.0, commentAr: "شكراً للموظف في الاستقبال ", commentEn: "Thanks to the receptionist for her patience.", avatar: defaultAvatar },
   { nameAr: "عمر الفطيم", nameEn: "Omar Al Futtaim", rating: 4.9, commentAr: "احترافية عالية في التعامل مع الشركات.", commentEn: "High professionalism in dealing with companies.", avatar: defaultAvatar },
